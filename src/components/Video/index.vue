@@ -1,5 +1,5 @@
 <template>
-  <div id="videos" class="video-div" :class="isHiddenVideo?'display-none':'display-block'">
+  <div id="videos" v-drag class="video-div" :class="isHiddenVideo?'display-none':'display-block'">
     <div class="publishVideo">
       <video
         id="publish_video1"
@@ -56,6 +56,35 @@
 <script>
 export default {
   name: 'Index',
+  // 自定义指令
+  directives: {
+    drag: {
+      // 指令的定义
+      bind: function(el) {
+        const oDiv = el // 获取当前元素
+        oDiv.onmousedown = (e) => {
+          console.log('onmousedown')
+          // 算出鼠标相对元素的位置
+          const disX = e.clientX - oDiv.offsetLeft
+          const disY = e.clientY - oDiv.offsetTop
+
+          document.onmousemove = (e) => {
+            // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+            const left = e.clientX - disX
+            const top = e.clientY - disY
+
+            oDiv.style.left = left + 'px'
+            oDiv.style.top = top + 'px'
+          }
+
+          document.onmouseup = (e) => {
+            document.onmousemove = null
+            document.onmouseup = null
+          }
+        }
+      }
+    }
+  },
   props: {
     isHiddenVideo: {
       type: Boolean,
@@ -91,6 +120,7 @@ export default {
 .display-block {
   display: block;
 }
+
 .video-div {
   position: absolute;
   top: 40px;
@@ -105,7 +135,7 @@ export default {
     width: 100%;
     height: 100%;
 
-    .time{
+    .time {
       position: absolute;
       top: 10px;
       right: 0;
@@ -114,6 +144,7 @@ export default {
       line-height: 40px;
       color: white;
     }
+
     .video-tool {
       position: absolute;
       bottom: 0;
@@ -127,6 +158,7 @@ export default {
         top: -20px;
         right: calc(50% - 20px);
         width: 40px;
+        z-index: 99;
       }
 
       .btn-class {
@@ -173,7 +205,7 @@ export default {
     width: 200px;
     height: 200px;
     overflow: hidden;
-    background-color: #409eff;
+    //background-color: #409eff;
     border-radius: 10px;
   }
 }

@@ -5,17 +5,23 @@
       <div class="info-name"><span class="name">江流儿</span><span> 高级UI设计师 | 29岁 | 女 | 3-5年 </span></div>
       <div class="info-text"><span>请求与你视频面试</span></div>
     </div>
-    <div class="btn-base kshf-btn">快捷回复</div>
-    <div class="btn-base ckjl-btn">查看简历</div>
-    <img class="img-jj" src="@/assets/images/jj.png" alt="">
-    <img class="img-splj" src="@/assets/images/splj.png" alt="">
+    <div class="btn-base kshf-btn" @click="onAction('3')">快捷回复</div>
+    <div class="btn-base ckjl-btn" @click="onAction('4')">查看简历</div>
+    <img class="img-jj" src="@/assets/images/jj.png" alt="" @click="onAction('1')">
+    <img class="img-splj" src="@/assets/images/splj.png" alt="" @click="onAction('2')">
 
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Index'
+  name: 'Index',
+  methods: {
+    onAction(type) {
+      // 1 接听 2 拒绝 3 快速回复 4 查看简历
+      this.$emit('onAction', type)
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -91,10 +97,6 @@ export default {
     text-align: center;
     background: #000;
     border-radius: 17px;
-  }
-
-  .ckjl-btn {
-
   }
 
   .img-jj {

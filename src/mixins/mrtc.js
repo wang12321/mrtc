@@ -33,17 +33,17 @@ export default {
       test_controller.OnConnectOK = () => {
         // conn_state = 0;
         // this.initRoom()
-        alert('建立连接成功')
+        console.log('建立连接成功')
         // test_controller.JoinRoom('669168215684029', '123', this.getSign())
       }
       // 建立连接失败回调
       test_controller.OnConnectFailed = function(code, msg) {
         console.log(code, msg)
-        alert('建立连接失败, 请尝试https修复')
+        console.log('建立连接失败, 请尝试https修复')
       }
       // 房间初始化成功
       test_controller.OnInitRoomConfigOK = () => {
-        alert('房间初始化成功')
+        console.log('房间初始化成功')
         if (this.role === 'created') {
           this.createRoom()
         } else if (this.role === 'join') {
@@ -55,67 +55,82 @@ export default {
       // 房间初始化失败
       test_controller.OnInitRoomConfigFail = function(err_code, err_msg) {
         console.log(123123123, err_code, err_msg)
-        alert('房间初始化失败')
+        console.log('房间初始化失败')
       }
       // 创建房间成功回调
       test_controller.OnCreateRoomSucc = (room_id, rtoken) => {
         console.log(123123, room_id, rtoken)
 
         this.isHiddenVideo = false
+        this.typeState = '0'
+        this.messageSend({
+          toUserId: '1592321317354872833',
+          userId: '123',
+          type: '1',
+          roomNumber: room_id,
+          passWord: rtoken
+        })
         // test_controller.JoinRoom(room_id, rtoken, this.getSign())
 
-        alert('创建房间成功')
+        console.log('创建房间成功')
       }
       // 创建房间失败回调
       test_controller.OnCreateRoomFailed = function(err_code, err_msg) {
         console.log(err_code, err_msg)
-        alert('创建房间失败')
+        console.log('创建房间失败')
       }
       // 加入房间成功
       test_controller.OnJoinRoomSucc = () => {
-        alert('加入房间成功')
+        console.log('加入房间成功')
         this.isHiddenVideo = false
+        this.typeState = '0'
       }
       // 加入房间失败
       test_controller.OnJoinRoomFailed = function(err_code, err_msg) {
         console.log(err_code, err_msg)
-        alert('加入房间失败')
+        console.log('加入房间失败')
       }
-      test_controller.OnPublishSucc = (sid)=> {
+      test_controller.OnPublishSucc = (sid) => {
         this.timeStart()
-        alert('发布订阅')
+        console.log('发布订阅')
       }
       // 订阅成功回调
       test_controller.OnSubscribeSucc = function(feedId, sid) {
         test_controller.trace(`~~~~~~~~~~~~~ OnSubscribeSuccess  Response  , sid=${sid},feedId=${feedId}`)
-        alert('订阅成功回调')
+        console.log('订阅成功回调')
 
         // document.getElementById("audio0").play()
         // document.getElementById("video0").play()
       }
       // 邀请成功
       test_controller.OnInviteOK = function() {
-        alert('邀请成功回调')
+        console.log('邀请成功回调')
       }
 
       // 邀请失败
       test_controller.OnInviteFail = function(code, msg) {
-        alert('邀请失败回调')
+        console.log('邀请失败回调')
       }
       test_controller.OnReplyInviteOK = () => {
-        alert('回复邀请回调')
+        console.log('回复邀请回调')
       }
       // 退出房间回调
       test_controller.OnLeaveRoom = (leaveType) => {
         test_controller.warning(`~~~~~~~~~~~~~ leave room! leaveType = ${leaveType}`)
-        alert('退出房间成功')
+        console.log('退出房间成功')
         this.onTimeReset()
         this.isHiddenVideo = true
+      }
+      // 退出房间回调
+      test_controller.OnParticipantLeaveRoom = (participant, exitType) => {
+        test_controller.warning(`~~~~~~~~~~~~~ leave room! leaveType = ${participant}${exitType}`)
+        console.log('对方退出房间成功')
+        this.onQuit()
       }
     },
     joinRoom() {
       const test_controller = this.test_controller
-      test_controller.JoinRoom('669168215684029', '123', this.getSign())
+      test_controller.JoinRoom(this.roomID, this.roomKey, this.getSign())
     },
     createRoom() {
       const test_controller = this.test_controller

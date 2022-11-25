@@ -1,4 +1,10 @@
 ### 一、项目简介
+测试集成阿里MRTC的demo
+官方文档：https://help.aliyun.com/document_detail/171244.html
+官方demo是html+js的
+现改成了vue版
+
+集成方式：npm包集成
 
 ### 二、注意事项
 1、如果启动mock数据 node 版本 不能是12.12.0 -- 12.20.0
