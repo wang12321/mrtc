@@ -212,6 +212,28 @@ export default {
       console.log(1231232123123123, config_param)
       test_controller.InitRoomConfig(config_param)
     },
+    onPublish() {
+      const test_controller = this.test_controller
+      const config_param = {
+        'media_type': 1,
+        'need_volume_analyser': true,
+        'publish_video_id': 'publish_video1',
+        'publish_streamId_id': 'publish_streamId1',
+        'aspectRatioStrongDepend': false,
+        'aspectRatio': '0',
+        'video_profile_type': '2',
+        'publish_tag': 'VIDEO_SOURCE_CAMERA',
+        'enableVideo': true,
+        'enableAudio': true,
+        'publish_device': 1,
+        'transport_': 'all',
+        'defaultTurnServer': '',
+        'degradationType': 1,
+        'scalabilityMode': 'NONE'
+      }
+
+      test_controller.Publish(config_param)
+    },
     init() {
       const test_controller = this.test_controller
       const config_param = {}

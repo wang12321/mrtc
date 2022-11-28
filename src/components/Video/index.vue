@@ -157,8 +157,8 @@ export default {
         position: absolute;
         top: -20px;
         right: calc(50% - 20px);
-        width: 40px;
         z-index: 99;
+        width: 40px;
       }
 
       .btn-class {

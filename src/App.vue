@@ -2,7 +2,7 @@
   <div id="app">
     <router-view />
     <Video :is-hidden-video="isHiddenVideo" :time="timeStr" @onQuit="onQuit" />
-    <InviteVideo v-if="typeState === '1'" @onAction="onAction" />
+    <InviteVideo v-if="typeState === '0'" @onAction="onAction" />
     <div class="joinroom" @click="initRoom('join')">加入房间</div>
     <div class="joinroom created" @click="initRoom('created')">创建房间</div>
 
